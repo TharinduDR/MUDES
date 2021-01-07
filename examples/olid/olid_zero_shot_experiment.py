@@ -12,13 +12,13 @@ test_sentences = test['text'].tolist()
 
 app = MUDESApp("small", use_cuda=False)
 
-hate_spans_list = []
+toxic_spans_list = []
 predictions = []
 for test_sentence in test_sentences:
-    hate_spans = app.predict_toxic_spans(test_sentence, spans=True)
-    hate_spans_list.append(hate_spans)
+    toxic_spans = app.predict_toxic_spans(test_sentence, spans=True)
+    toxic_spans_list.append(toxic_spans)
 
-    if len(hate_spans) > 0:
+    if len(toxic_spans) > 0:
         predictions.append("OFF")
 
     else:
