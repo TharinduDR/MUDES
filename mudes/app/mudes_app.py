@@ -67,11 +67,11 @@ class MUDESApp:
                                             unzip=True)
 
     def predict_toxic_spans(self, text: str, spans: bool = False, language: str = "en"):
-        hate_spans = predict_spans(self.model, text, language)
+        toxic_spans = predict_spans(self.model, text, language)
         if spans:
-            return contiguous_ranges(hate_spans)
+            return contiguous_ranges(toxic_spans)
         else:
-            return hate_spans
+            return toxic_spans
 
     def predict_tokens(self, text: str, language: str = "en"):
         toxic_spans = contiguous_ranges(predict_spans(self.model, text))
