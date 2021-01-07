@@ -1,6 +1,6 @@
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) 
-[![PyPI version](https://img.shields.io/pypi/v/hatespans?color=%236ecfbd&label=pypi%20package&style=flat-square)](https://pypi.org/project/hatespans/)
-[![Downloads](https://pepy.tech/badge/hatespans)](https://pepy.tech/project/hatespans)
+[![PyPI version](https://img.shields.io/pypi/v/mudes?color=%236ecfbd&label=pypi%20package&style=flat-square)](https://pypi.org/project/mudes/)
+[![Downloads](https://pepy.tech/badge/mudes)](https://pepy.tech/project/mudes)
 # MUDES - {Mu}ltilingual {De}tection of Offensive {S}pans
 
 We provide state-of-the-art models to detect toxic spans in text. We have evaluated our models on  Toxic Spans task at SemEval 2021 (Task 5).
