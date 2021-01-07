@@ -1,5 +1,6 @@
 from sklearn.metrics import f1_score
 
+
 def f1(predictions, gold):
     """
     F1 (a.k.a. DICE) operating on two lists of offsets (e.g., character).
