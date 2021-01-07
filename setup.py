@@ -4,14 +4,14 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setup(
-    name="hatespans",
-    version="0.2.0",
+    name="mudes",
+    version="0.1.0",
     author="Tharindu Ranasinghe",
     author_email="rhtdranasinghe@gmail.com",
     description="Toxic Spans Prediction",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/TharinduDR/HateSpans",
+    url="https://github.com/TharinduDR/MUDES",
     packages=find_packages(exclude=("examples",)),
     classifiers=[
         "Intended Audience :: Science/Research",
