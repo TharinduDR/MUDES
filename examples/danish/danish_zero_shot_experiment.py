@@ -18,7 +18,7 @@ for test_sentence in test_sentences:
     toxic_words = ""
     toxic_spans = app.predict_toxic_spans(test_sentence, spans=True, language="da")
     for toxic_span in toxic_spans:
-        toxic_words = toxic_words + " " + test_sentence[hate_span[0]:hate_span[1]]
+        toxic_words = toxic_words + " " + test_sentence[toxic_span[0]:toxic_span[1]]
     toxic_spans_list.append(toxic_spans)
     toxic_word_list.append(toxic_words)
     if len(toxic_spans) > 0:
