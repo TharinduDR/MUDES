@@ -69,10 +69,10 @@ from transformers import (
 )
 from transformers.data.datasets.language_modeling import LineByLineTextDataset, TextDataset
 
-from hatespans.algo.custom_models.models import ElectraForLanguageModelingModel
-from hatespans.algo.language_modeling_utils import mask_tokens, SimpleDataset
-from hatespans.config.model_args import LanguageModelingArgs
-from hatespans.config.utils import sweep_config_to_sweep_values
+from mudes.algo.custom_models.models import ElectraForLanguageModelingModel
+from mudes.algo.language_modeling_utils import mask_tokens, SimpleDataset
+from mudes.config.model_args import LanguageModelingArgs
+from mudes.config.utils import sweep_config_to_sweep_values
 
 try:
     import wandb
