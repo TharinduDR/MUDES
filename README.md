@@ -36,6 +36,8 @@ from mudes.app.mudes_app import MUDESApp
 
 app = MUDESApp("en-large", use_cuda=False)
 print(app.predict_toxic_spans("You motherfucking cunt", spans=True))
+
 ```
 
-
+## System Demonstration
+An experimental demonstration interface called MUDES-UI has been released on [GitHub](https://github.com/TharinduDR/MUDES-UI) and can be checked out in [here](http://rgcl.wlv.ac.uk/tharindu_demo/).
