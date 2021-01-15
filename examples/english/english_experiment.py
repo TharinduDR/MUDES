@@ -9,7 +9,7 @@ from mudes.algo.evaluation import f1
 from mudes.algo.mudes_model import MUDESModel
 from mudes.algo.language_modeling import LanguageModelingModel
 from mudes.algo.predict import predict_spans
-from mudes.algo.preprocess import read_datafile, format_data, format_lm
+from mudes.algo.preprocess import read_datafile, format_data, format_lm, read_test_datafile
 import torch
 
 if not os.path.exists(TEMP_DIRECTORY):
@@ -17,6 +17,7 @@ if not os.path.exists(TEMP_DIRECTORY):
 
 train = read_datafile('examples/english/data/tsd_train.csv')
 dev = read_datafile('examples//english/data/tsd_trial.csv')
+test = read_test_datafile('examples//english/data/tsd_test.csv')
 
 
 if LANGUAGE_FINETUNE:

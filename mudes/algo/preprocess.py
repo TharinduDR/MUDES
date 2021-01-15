@@ -42,6 +42,15 @@ def read_datafile(filename):
     return data
 
 
+def read_test_datafile(filename):
+    data = []
+    with open(filename) as csvfile:
+        reader = csv.DictReader(csvfile)
+        for row in reader:
+            data.append((row['text']))
+    return data
+
+
 def format_data(data: []):
     nlp = English()
     tokenizer = nlp.Defaults.create_tokenizer(nlp)
@@ -78,8 +87,12 @@ def split_data(data: [], seed: int):
     return train_df.to_numpy().tolist(), val_df.to_numpy().tolist()
 
 
-def format_lm(data: []):
+def format_lm(data: [], test=False):
     text_list = []
-    for n, (spans, text) in enumerate(data):
-        text_list.append(text)
+    if not test:
+        for n, (spans, text) in enumerate(data):
+            text_list.append(text)
+    else:
+        for n, text in enumerate(data):
+            text_list.append(text)
     return text_list

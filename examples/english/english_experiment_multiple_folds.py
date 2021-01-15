@@ -10,7 +10,7 @@ from mudes.algo.evaluation import f1
 from mudes.algo.mudes_model import MUDESModel
 from mudes.algo.language_modeling import LanguageModelingModel
 from mudes.algo.predict import predict_spans
-from mudes.algo.preprocess import read_datafile, format_data, format_lm, split_data
+from mudes.algo.preprocess import read_datafile, format_data, format_lm, split_data, read_test_datafile
 import torch
 import numpy as np
 
@@ -19,13 +19,17 @@ if not os.path.exists(TEMP_DIRECTORY):
 
 train = read_datafile('examples/english/data/tsd_train.csv')
 dev = read_datafile('examples//english/data/tsd_trial.csv')
+test = read_test_datafile('examples//english/data/tsd_test.csv')
 
+print(len(test))
 
 if LANGUAGE_FINETUNE:
     train_list = format_lm(train)
     dev_list = format_lm(dev)
+    test_list = format_lm(test, test=True)
 
-    complete_list = train_list + dev_list
+    complete_list = train_list + dev_list + test_list
+
     lm_train = complete_list[0: int(len(complete_list)*0.8)]
     lm_test = complete_list[-int(len(complete_list)*0.2):]
 
@@ -43,6 +47,7 @@ if LANGUAGE_FINETUNE:
 
 # model = HateSpansModel(MODEL_TYPE, MODEL_NAME, labels=tags, args=transformer_config)
 dev_preds = []
+test_preds = []
 fold_preds = []
 for i in range(transformer_config["n_fold"]):
     if os.path.exists(transformer_config['output_dir']) and os.path.isdir(transformer_config['output_dir']):
@@ -64,16 +69,23 @@ for i in range(transformer_config["n_fold"]):
         model = MUDESModel(MODEL_TYPE, MODEL_NAME, labels=tags, args=transformer_config)
 
     scores = []
-    predictions_list = []
+    dev_predictions_list = []
     for n, (spans, text) in enumerate(dev):
         predictions = predict_spans(model, text)
         score = f1(predictions, spans)
         scores.append(score)
-        predictions_list.append(predictions)
+        dev_predictions_list.append(predictions)
 
     fold_preds.append(statistics.mean(scores))
-    dev_preds.append(predictions_list)
+    dev_preds.append(dev_predictions_list)
     print('avg F1 %g' % statistics.mean(scores))
+
+    test_predictions_list = []
+    for n, text in enumerate(test):
+        predictions = predict_spans(model, text)
+        test_predictions_list.append(predictions)
+
+    test_preds.append(test_predictions_list)
 
 print('avg F1 scores in each fold', fold_preds)
 scores = []
@@ -94,6 +106,26 @@ for n, (spans, text) in enumerate(dev):
     scores.append(score)
 
 print('avg F1 %g' % statistics.mean(scores))
+
+final_predictions = []
+for n, text in enumerate(test):
+    majority_span = []
+    fold_predictions = []
+    for prediction_list in test_preds:
+        fold_predictions.append(prediction_list[n])
+    for index in range(0, len(text)):
+        count = 0
+        for fold_prediction in fold_predictions:
+            if index in fold_prediction:
+                count += 1
+        if count/transformer_config["n_fold"] >= 0.5:
+            majority_span.append(index)
+    final_predictions.append(majority_span)
+
+
+with open(os.path.join(TEMP_DIRECTORY,"spans-pred.txt"), "w") as out:
+    for idx, prediction in enumerate(final_predictions):
+        out.write(f"{str(idx)}\t{str(prediction)}\n")
 
 
 

@@ -2,7 +2,7 @@ from multiprocessing import cpu_count
 
 DATA_DIRECTORY = "examples/monolingual/en_en/data/"
 TEMP_DIRECTORY = "temp/data"
-LANGUAGE_FINETUNE = False
+LANGUAGE_FINETUNE = True
 MODEL_TYPE = "bert"
 MODEL_NAME = "bert-large-cased"
 
