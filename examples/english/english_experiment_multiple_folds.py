@@ -12,6 +12,7 @@ from mudes.algo.language_modeling import LanguageModelingModel
 from mudes.algo.predict import predict_spans
 from mudes.algo.preprocess import read_datafile, format_data, format_lm, split_data, read_test_datafile
 import torch
+import pandas as pd
 import numpy as np
 
 if not os.path.exists(TEMP_DIRECTORY):
@@ -21,7 +22,6 @@ train = read_datafile('examples/english/data/tsd_train.csv')
 dev = read_datafile('examples//english/data/tsd_trial.csv')
 test = read_test_datafile('examples//english/data/tsd_test.csv')
 
-print(len(test))
 
 if LANGUAGE_FINETUNE:
     train_list = format_lm(train)
@@ -44,6 +44,9 @@ if LANGUAGE_FINETUNE:
     model = LanguageModelingModel("auto", MODEL_NAME, args=language_modeling_args, use_cuda=torch.cuda.is_available())
     model.train_model(os.path.join(TEMP_DIRECTORY, "lm_train.txt"), eval_file=os.path.join(TEMP_DIRECTORY, "lm_test.txt"))
     MODEL_NAME = language_modeling_args["best_model_dir"]
+
+
+train = pd.comcat([train, dev], ignore_index=True)
 
 # model = HateSpansModel(MODEL_TYPE, MODEL_NAME, labels=tags, args=transformer_config)
 dev_preds = []
@@ -123,7 +126,7 @@ for n, text in enumerate(test):
     final_predictions.append(majority_span)
 
 
-with open(os.path.join(TEMP_DIRECTORY,"spans-pred.txt"), "w") as out:
+with open(os.path.join(TEMP_DIRECTORY, "spans-pred.txt"), "w") as out:
     for idx, prediction in enumerate(final_predictions):
         out.write(f"{str(idx)}\t{str(prediction)}\n")
 

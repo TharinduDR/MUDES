@@ -3,8 +3,8 @@ from multiprocessing import cpu_count
 DATA_DIRECTORY = "examples/monolingual/en_en/data/"
 TEMP_DIRECTORY = "temp/data"
 LANGUAGE_FINETUNE = True
-MODEL_TYPE = "bert"
-MODEL_NAME = "bert-large-cased"
+MODEL_TYPE = "roberta"
+MODEL_NAME = "roberta-large"
 
 transformer_config = {
     'output_dir': 'temp/outputs/',
@@ -13,7 +13,7 @@ transformer_config = {
 
     'fp16': False,
     'fp16_opt_level': 'O1',
-    'max_seq_length': 140,
+    'max_seq_length': 180,
     'train_batch_size': 8,
     'gradient_accumulation_steps': 1,
     'eval_batch_size': 8,
@@ -53,7 +53,7 @@ transformer_config = {
     "multiprocessing_chunksize": 500,
     'silent': False,
 
-    'wandb_project': "hate_spans",
+    'wandb_project': None,
     'wandb_kwargs': {},
 
     "use_early_stopping": True,
@@ -78,7 +78,7 @@ language_modeling_args = {
 
     'fp16': False,
     'fp16_opt_level': 'O1',
-    'max_seq_length': 140,  # 128
+    'max_seq_length': 180,  # 128
     'train_batch_size': 8,
     'gradient_accumulation_steps': 1,
     'eval_batch_size': 8,
