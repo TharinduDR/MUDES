@@ -46,8 +46,6 @@ if LANGUAGE_FINETUNE:
     MODEL_NAME = language_modeling_args["best_model_dir"]
 
 
-train = train.append(dev)
-
 # model = HateSpansModel(MODEL_TYPE, MODEL_NAME, labels=tags, args=transformer_config)
 dev_preds = []
 test_preds = []

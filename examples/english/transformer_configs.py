@@ -2,7 +2,7 @@ from multiprocessing import cpu_count
 
 DATA_DIRECTORY = "examples/monolingual/en_en/data/"
 TEMP_DIRECTORY = "temp/data"
-LANGUAGE_FINETUNE = True
+LANGUAGE_FINETUNE = False
 MODEL_TYPE = "roberta"
 MODEL_NAME = "roberta-large"
 
@@ -13,7 +13,7 @@ transformer_config = {
 
     'fp16': False,
     'fp16_opt_level': 'O1',
-    'max_seq_length': 180,
+    'max_seq_length': 200,
     'train_batch_size': 8,
     'gradient_accumulation_steps': 1,
     'eval_batch_size': 8,
