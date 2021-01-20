@@ -31,14 +31,17 @@ def fix_spans(spans, text, special_characters=SPECIAL_CHARACTERS):
     return cleaned
 
 
-def read_datafile(filename):
+def read_datafile(filename, fix=True):
     data = []
     with open(filename) as csvfile:
         reader = csv.DictReader(csvfile)
         count = 0
         for row in reader:
-            fixed = fix_spans(ast.literal_eval(row['spans']), row['text'])
-            data.append((fixed, row['text']))
+            if fix:
+                fixed = fix_spans(ast.literal_eval(row['spans']), row['text'])
+                data.append((fixed, row['text']))
+            else:
+                data.append((row['spans'], row['text']))
     return data
 
 

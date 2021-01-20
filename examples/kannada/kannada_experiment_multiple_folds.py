@@ -18,7 +18,7 @@ import numpy as np
 if not os.path.exists(TEMP_DIRECTORY):
     os.makedirs(TEMP_DIRECTORY)
 
-train = read_datafile('examples/kannada/data/kannada_final.tsv.txt')
+train = read_datafile('examples/kannada/data/kannada_final.tsv.txt', fix=False)
 train, dev = split_data(train, seed=int(transformer_config["manual_seed"]))
 
 
