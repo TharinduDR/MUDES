@@ -4,7 +4,7 @@ import statistics
 
 from sklearn.model_selection import train_test_split
 
-from examples.english.transformer_configs import transformer_config, MODEL_TYPE, MODEL_NAME, LANGUAGE_FINETUNE, \
+from examples.kannada.transformer_configs import transformer_config, MODEL_TYPE, MODEL_NAME, LANGUAGE_FINETUNE, \
     language_modeling_args, TEMP_DIRECTORY
 from mudes.algo.evaluation import f1
 from mudes.algo.mudes_model import MUDESModel
