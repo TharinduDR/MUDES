@@ -1,5 +1,6 @@
 from multiprocessing import cpu_count
 
+DATA_DIRECTORY = "examples/monolingual/en_en/data/"
 TEMP_DIRECTORY = "temp/data"
 LANGUAGE_FINETUNE = False
 MODEL_TYPE = "roberta"
