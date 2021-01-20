@@ -1,10 +1,10 @@
 from multiprocessing import cpu_count
 
-DATA_DIRECTORY = "examples/monolingual/en_en/data/"
+
 TEMP_DIRECTORY = "temp/data"
 LANGUAGE_FINETUNE = False
-MODEL_TYPE = "roberta"
-MODEL_NAME = "roberta-large"
+MODEL_TYPE = "xlmroberta"
+MODEL_NAME = "xlm-roberta-large"
 
 transformer_config = {
     'output_dir': 'temp/outputs/',

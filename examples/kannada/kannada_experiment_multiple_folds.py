@@ -18,17 +18,15 @@ import numpy as np
 if not os.path.exists(TEMP_DIRECTORY):
     os.makedirs(TEMP_DIRECTORY)
 
-train = read_datafile('examples/english/data/tsd_train.csv')
-dev = read_datafile('examples//english/data/tsd_trial.csv')
-test = read_test_datafile('examples//english/data/tsd_test.csv')
+train = read_datafile('examples/kannada/data/kannada_final.tsv.txt')
+train, dev = split_data(train, seed=int(transformer_config["manual_seed"]))
 
 
 if LANGUAGE_FINETUNE:
     train_list = format_lm(train)
     dev_list = format_lm(dev)
-    test_list = format_lm(test, test=True)
 
-    complete_list = train_list + dev_list + test_list
+    complete_list = train_list + dev_list
 
     lm_train = complete_list[0: int(len(complete_list)*0.8)]
     lm_test = complete_list[-int(len(complete_list)*0.2):]
@@ -81,13 +79,6 @@ for i in range(transformer_config["n_fold"]):
     dev_preds.append(dev_predictions_list)
     print('avg F1 %g' % statistics.mean(scores))
 
-    test_predictions_list = []
-    for n, text in enumerate(test):
-        predictions = predict_spans(model, text)
-        test_predictions_list.append(predictions)
-
-    test_preds.append(test_predictions_list)
-
 print('avg F1 scores in each fold', fold_preds)
 scores = []
 for n, (spans, text) in enumerate(dev):
@@ -108,25 +99,7 @@ for n, (spans, text) in enumerate(dev):
 
 print('avg F1 %g' % statistics.mean(scores))
 
-final_predictions = []
-for n, text in enumerate(test):
-    majority_span = []
-    fold_predictions = []
-    for prediction_list in test_preds:
-        fold_predictions.append(prediction_list[n])
-    for index in range(0, len(text)):
-        count = 0
-        for fold_prediction in fold_predictions:
-            if index in fold_prediction:
-                count += 1
-        if count/transformer_config["n_fold"] >= 0.5:
-            majority_span.append(index)
-    final_predictions.append(majority_span)
 
-
-with open(os.path.join(TEMP_DIRECTORY, "spans-pred.txt"), "w") as out:
-    for idx, prediction in enumerate(final_predictions):
-        out.write(f"{str(idx)}\t{str(prediction)}\n")
 
 
 

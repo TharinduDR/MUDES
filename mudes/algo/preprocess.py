@@ -96,3 +96,5 @@ def format_lm(data: [], test=False):
         for n, text in enumerate(data):
             text_list.append(text)
     return text_list
+
+
