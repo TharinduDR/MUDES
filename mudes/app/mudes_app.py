@@ -26,34 +26,16 @@ class MUDESApp:
         self.cuda_device = cuda_device
 
         MODEL_CONFIG = {
-            "small": ("bert", "1-V5RxnmbTXNT_YlKzTKz1St4W2xpRqR4"),
-            "en-base": ("xlnet", "1-O0vSS7G0wurvcVAzG4HUEU-oEjB4kAR"),
-            "en-large": ("roberta", "15g2NCeUhe7ScVzU3k1AIrNhBpcR8LqH9"),
-            "multilingual-base": ("xlmroberta", "1-_n72Fovt2tPE2UZ_25JWvSmsSE9K6EZ"),
-            "multilingual-large": ("xlmroberta", "10ZHESe0Um-fbHkSQBOazVTXxo4iYtlaQ")
+            "en-base": ("bert", "mudes/en-base"),
+            "en-large": ("roberta", "mudes/en-large"),
+            "multilingual-base": ("xlmroberta", "mudes/multilingual-base"),
+            "multilingual-large": ("xlmroberta", "mudes/multilingual-large")
         }
 
         if model_name_or_path in MODEL_CONFIG:
-            self.trained_model_type, self.drive_id = MODEL_CONFIG[model_name_or_path]
+            self.trained_model_type, self.model_id = MODEL_CONFIG[model_name_or_path]
 
-            try:
-                from torch.hub import _get_torch_home
-                torch_cache_home = _get_torch_home()
-            except ImportError:
-                torch_cache_home = os.path.expanduser(
-                    os.getenv('TORCH_HOME', os.path.join(
-                        os.getenv('XDG_CACHE_HOME', '~/.cache'), 'torch')))
-            default_cache_path = os.path.join(torch_cache_home, 'mudes')
-            self.model_path = os.path.join(default_cache_path, self.model_name_or_path)
-            if not os.path.exists(self.model_path) or not os.listdir(self.model_path):
-                logging.info(
-                    "Downloading MUDES model and saving it at {}".format(self.model_path))
-
-                gdd.download_file_from_google_drive(file_id=self.drive_id,
-                                                    dest_path=os.path.join(self.model_path, "model.zip"),
-                                                    showsize=True, unzip=True)
-
-            self.model = MUDESModel(self.trained_model_type, self.model_path, use_cuda=self.use_cuda,
+            self.model = MUDESModel(self.trained_model_type, self.model_id, use_cuda=self.use_cuda,
                                         cuda_device=self.cuda_device)
 
         else:
