@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name="mudes",
-    version="0.2.0",
+    version="0.2.1",
     author="Tharindu Ranasinghe",
     author_email="rhtdranasinghe@gmail.com",
     description="Toxic Spans Prediction",
@@ -36,5 +36,6 @@ setup(
         "sentencepiece",
         "onnxruntime",
         "seqeval",
+        "spacy"
     ],
 )
