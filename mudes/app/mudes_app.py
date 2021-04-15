@@ -35,11 +35,11 @@ class MUDESApp:
         if model_name_or_path in MODEL_CONFIG:
             self.trained_model_type, self.model_id = MODEL_CONFIG[model_name_or_path]
 
-            self.model = MUDESModel(self.trained_model_type, self.model_id, use_cuda=self.use_cuda,
+            self.model = MUDESModel(self.trained_model_type, self.model_id, labels=["NOT_TOXIC", "TOXIC"], use_cuda=self.use_cuda,
                                         cuda_device=self.cuda_device)
 
         else:
-            self.model = MUDESModel(model_type, self.model_name_or_path, use_cuda=self.use_cuda,
+            self.model = MUDESModel(model_type, self.model_name_or_path, labels=["NOT_TOXIC", "TOXIC"], use_cuda=self.use_cuda,
                                         cuda_device=self.cuda_device)
 
     @staticmethod

@@ -7,7 +7,7 @@ from mudes.app.mudes_app import MUDESApp
 # for token in tokens:
 #     print(token.text, token.is_toxic)
 
-app = MUDESApp("en-large", use_cuda=False)
+app = MUDESApp("en-base", use_cuda=False)
 print(app.predict_toxic_spans("Fuck this motherfucker", spans=True, language="en"))
 
 tokens = app.predict_tokens("Fuck this motherfucker", language="en")
