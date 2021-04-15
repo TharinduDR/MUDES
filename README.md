@@ -43,8 +43,8 @@ print(app.predict_toxic_spans("You motherfucking cunt", spans=True))
 An experimental demonstration interface called MUDES-UI has been released on [GitHub](https://github.com/TharinduDR/MUDES-UI) and can be checked out in [here](http://rgcl.wlv.ac.uk/mudes/).
 
 
-## System Demonstration
-If you are using the package, please consider citing these papers.
+## Citing & Authors
+If you are using this repo, please consider citing these papers.
 
 ```bash
 @inproceedings{ranasinghemudes,
