@@ -41,3 +41,25 @@ print(app.predict_toxic_spans("You motherfucking cunt", spans=True))
 
 ## System Demonstration
 An experimental demonstration interface called MUDES-UI has been released on [GitHub](https://github.com/TharinduDR/MUDES-UI) and can be checked out in [here](http://rgcl.wlv.ac.uk/tharindu_demo/).
+
+
+## System Demonstration
+If you are using the package, please consider citing these papers.
+
+```bash
+@inproceedings{ranasinghemudes,
+ title={{MUDES: Multilingual Detection of Offensive Spans}}, 
+ author={Tharindu Ranasinghe and Marcos Zampieri},  
+ booktitle={Proceedings of NAACL},
+ year={2021}
+}
+```
+
+```bash
+@inproceedings{ranasinghe2021semeval,
+  title={{WLV-RIT at SemEval-2021 Task 5: A Neural Transformer Framework for Detecting Toxic Spans}},
+  author = "Ranasinghe, Tharindu  and Sarkar, Diptanu and Zampieri, Marcos and Ororbia, Alex",
+  booktitle={Proceedings of SemEval},
+  year={2021}
+}
+```
