@@ -4,4 +4,3 @@ transformers==3.5.1
 seqeval==1.2.2
 tensorboardX==2.1
 wandb==0.10.11
-googledrivedownloader==0.4
