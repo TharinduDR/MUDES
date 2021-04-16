@@ -1,12 +1,7 @@
-import os
-
 from spacy.lang.en import English
 from spacy.lang.xx import MultiLanguage
 
 from mudes.algo.mudes_model import MUDESModel
-import logging
-from google_drive_downloader import GoogleDriveDownloader as gdd
-
 from mudes.algo.predict import predict_spans
 from mudes.algo.preprocess import contiguous_ranges
 
@@ -41,12 +36,6 @@ class MUDESApp:
         else:
             self.model = MUDESModel(model_type, self.model_name_or_path, labels=["NOT_TOXIC", "TOXIC"], use_cuda=self.use_cuda,
                                         cuda_device=self.cuda_device)
-
-    @staticmethod
-    def _download(drive_id, model_name):
-        gdd.download_file_from_google_drive(file_id=drive_id,
-                                            dest_path= os.path.join(".mudes", model_name, "model.zip"),
-                                            unzip=True)
 
     def predict_toxic_spans(self, text: str, spans: bool = False, language: str = "en"):
         toxic_spans = predict_spans(self.model, text, language)
