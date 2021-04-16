@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name="mudes",
-    version="0.2.2",
+    version="0.2.3",
     author="Tharindu Ranasinghe",
     author_email="rhtdranasinghe@gmail.com",
     description="Toxic Spans Prediction",
