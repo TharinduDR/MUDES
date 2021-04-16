@@ -29,7 +29,7 @@ def predict_spans(model, text: str, language: str = "en"):
     else:
         nlp = MultiLanguage()
 
-    tokenizer = nlp.Defaults.create_tokenizer(nlp)
+    tokenizer = nlp.tokenizer
     tokens = tokenizer(text)
     sentences = []
     tokenised_text = []
