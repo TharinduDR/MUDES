@@ -13,4 +13,4 @@ wandb
 sentencepiece
 onnxruntime
 seqeval
-spacy
+spacy==3.5.1

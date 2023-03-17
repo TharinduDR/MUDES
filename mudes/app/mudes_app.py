@@ -1,6 +1,6 @@
 from spacy.lang.en import English
 from spacy.lang.xx import MultiLanguage
-
+from spacy.tokenizer import Tokenizer
 from mudes.algo.mudes_model import MUDESModel
 from mudes.algo.predict import predict_spans
 from mudes.algo.preprocess import contiguous_ranges
@@ -53,7 +53,7 @@ class MUDESApp:
         else:
             nlp = MultiLanguage()
 
-        tokenizer = nlp.Defaults.create_tokenizer(nlp)
+        tokenizer = Tokenizer(nlp.vocab)
         tokens = tokenizer(text)
         output_tokens = []
         for token in tokens:
